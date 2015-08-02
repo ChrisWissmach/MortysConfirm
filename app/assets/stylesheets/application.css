@@ -1,0 +1,102 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+.home_button{
+ 	-webkit-transition: color 100ms linear;
+	-moz-transition: color 100ms linear;
+	-o-transition: color 100ms linear;
+	-ms-transition: color 100ms linear;
+	transition: color 100ms linear;
+	color:white;
+ }
+
+.home_button:hover{
+	color:red !important;
+	-webkit-transition: color 100ms linear;
+	-moz-transition: color 100ms linear;
+	-o-transition: color 100ms linear;
+	-ms-transition: color 100ms linear;
+	transition: color 100ms linear;
+
+}
+
+.main_div{
+	letter-spacing:-1px;
+	top:0;
+	left:0;
+	min-height:100vh;
+	width:100%;
+	background:url("/assets/main_bg.jpg");
+	background-size:cover;
+	text-align:center;
+	padding-top:50px;
+
+}
+
+.main_logo{
+	margin-top:100px;
+	width:500px;
+	margin:auto;
+}
+
+.add_email_background{
+	background:url("/assets/main_bg.jpg");
+	background-size:cover;
+	width:100%;
+	min-height:100vh;
+	padding-top:45vh;
+	text-align:center;
+}
+
+.add_event_background{
+	background:url("/assets/main_bg.jpg");
+	background-size:cover;
+	width:100%;
+	min-height:100vh;
+	padding-top:35vh;
+	text-align:center;
+}
+
+.view_event_background{
+	background:url("/assets/main_bg.jpg");
+	background-size:cover;
+	width:100%;
+	min-height:100vh;
+	text-align:center;
+	padding:0px;
+}
+
+.event_thread{
+	
+	padding:0px;
+	padding-top:50px;
+	background-color:rgba(255,255,255,0.8);
+	margin:0 auto;
+	float:none;
+	min-height:100vh;
+}
+
+.bar_graph_bar{
+	height:20px;
+	background:url('/assets/bar_graph_bg.png');
+	margin-top:5px;
+	margin-bottom:5px;
+	text-align:center;
+	line-height:20px;
+	color:white;
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+}

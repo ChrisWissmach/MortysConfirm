@@ -1,0 +1,92 @@
+%a{href:"/"}
+	%h2.home_button{style:"margin-left:20px;margin-top:0px;margin-bottom:0px;margin-top:7px;color:white;position:fixed;"} Home
+.div.view_event_background
+	.event_thread.col-lg-6.col-sm-8.col-xs-10{style:"padding-bottom:50px;"}
+		%div{style:"font-size:30px;letter-spacing;0px;margin-bottom:50px;"}=@event.name
+		%div{style:"width:100%;background-color:rgba(0,0,0,0.5);z-index:1000;padding-top:20px;padding-bottom:20px;color:white;"}=@event.description
+		%div{style:"width:100%;z-index:1000;padding-top:20px;padding-bottom:20px;"}
+			.row{style:"margin-bottom:0px;padding:10px;padding-bottom:0px;"}
+				.col-sm-5
+					<b>Name</b>
+				.col-sm-5
+					<b>Percent chance of going</b>
+				.col-sm-2
+					
+			.row{style:"margin-top:0px;padding:10px;"}
+				.col-sm-5
+					%input.form-control.confirm_name{placeholder:"Name"}
+				.col-sm-5
+					%input.form-control.confirm_percent{placeholder:"100"}
+				.col-sm-2
+					%button.btn.btn-default.confirm_button{"data-event_id" => "#{@event.id}"} Confirm
+		%div{style:"width:100%;background-color:white;padding-top:10px;padding-left:20px;padding-right:20px;padding-bottom:20px;text-align:center;"}
+			%p Who is going
+
+			%div.going_graph{style:"width:90%;min-height:200px;background-color:white;border:1px solid black;margin:auto;margin-bottom:10px;", "data-confirmed_going" => "#{@event.confirmed}"}
+			%p.name_label{style:"-webkit-transform: rotate(-90deg);float:left;position;asbolute;margin-left:-10px;"} Name
+			%p Percent In
+
+		%div.comments
+			%h5 Add a comment
+			= simple_form_for([@event, @event.comments.build]) do |f|
+				= f.input :author, label:false, input_html:{placeholder:"Name", style:"width:50%;margin-top:20px;margin-left:10px;"}
+				= f.input :content, label:false, input_html:{placeholder:"Comment", style:"width:80%;margin-bottom:20px;margin-left:10px;"}
+				=f.button :submit, "Add comment", style:"margin-bottom:10px;"
+		%div{style:"background-color:white;"}
+			
+			-@comments.each do |comment|
+				%div{style:"padding:10px;"}
+					%blank{style:"float:left;font-weight:bold", title:"#{comment.created_at}"}=comment.author + ", " + time_ago_in_words(comment.created_at) + " ago:"
+					%br
+					%br
+					%p{style:"max-width:100%;text-align:left;"}=comment.content
+					%hr{style:"margin-top:0px;margin-bottom:0px;"}
+
+
+		
+	
+
+<script>
+$(document).ready(function(){
+$(".name_label").css("margin-top",parseInt($(".going_graph").css("height")) * -0.6 + "px");
+var going_array = JSON.parse($(".going_graph").attr("data-confirmed_going"));
+//if(going_array == ""){
+//	$(".going_graph").append("<p class='no_confirmation_yet' style='margin-top:50px;'> No one has confirmed yet</p>");
+
+//}
+for(var i=0;i<going_array.length;i++){
+//$(".no_confirmation_yet").remove();
+$(".going_graph").append("<div class='bar_graph_bar', style='width:"+ going_array[i][1] +"%'><blank>"+ going_array[i][0]+": "+going_array[i][1] +"%</blank></div>");
+
+}
+
+$(".confirm_button").on("click",function(){
+var name = $(".confirm_name").val() + "%" + $(".confirm_percent").val();
+var event_id = $(this).attr("data-event_id");
+if($(".confirm_name").val() != "" && $(".confirm_percent").val() != ""){
+$.post("/events/update_confirmed", {
+event_id: event_id,
+name_percent: name
+}, function(data) {
+if (data.success === true) {
+location.reload();
+} else {
+
+}
+});
+};
+
+
+
+});
+
+
+
+
+
+
+
+
+
+})
+</script>

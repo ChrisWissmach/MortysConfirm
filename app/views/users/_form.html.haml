@@ -1,0 +1,7 @@
+= simple_form_for(@user) do |f|
+	%div{style:"width:100%;background-color:rgba(0,0,0,0.5);padding:30px;margin-top:20px;"}
+		.form-inputs
+		= f.input :email,label:false, input_html: {class: "form-control", style:"width:250px;margin:auto;margin-bottom:10px;"}
+
+		.form-actions
+		= f.button :submit,"Add Email", class: "btn-default"
